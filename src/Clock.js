@@ -1,8 +1,20 @@
 import React from 'react';
-import { Minutes } from './Minutes';
+import { Times } from './Times';
 
-export function Clock(props) {
+export function Clock({
+  time,
+  size,
+  shape,
+  division,
+  radius
+}) {
   return (
-    <Minutes time={props.time} />
+    <Times 
+      time={time}
+      size={size}
+      shape={shape}
+      division={division}
+      radius={radius}
+    />
   );
 }
