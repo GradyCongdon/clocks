@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Clock } from './Clock';
 import { Range } from './Range';
+import './App.css';
 
 const navStyle = {
   display: 'flex',
-  justifyContent: 'flex-end',
+  justifyContent: 'center',
+  alignItems: 'center',
   width: '100%',
   position: 'fixed',
   top: 0,
   right: 0,
   padding: '5px',
   borderBottom: 'solid 1px black',
-
 };
 
 function App() {
   const [time, setTime] = useState(new Date());
-  const [size, setSize] = useState(14);
+  const [size, setSize] = useState(15);
   const [radius, setRadius] = useState(300);
   const [shape, setShape] = useState('circle');
   const [division, setDivision] = useState('seconds');
@@ -25,7 +26,7 @@ function App() {
     const timer = setTimeout(() => {
       const now = new Date();
       setTime(now);
-    }, 1000);
+    }, 1000); // TODO change w/ division
     return () => {
       clearTimeout(timer);
     }
@@ -43,6 +44,7 @@ function App() {
       <nav style={navStyle}>
         <button onClick={() => setDivision('seconds')}> seconds </button>
         <button onClick={() => setDivision('minutes')}> minutes </button>
+        <button onClick={() => setDivision('hours')}> hours </button>
 
         <Range name="size" value={size} min={0} max={50} setValue={setSize} />
 

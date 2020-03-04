@@ -10,7 +10,14 @@ const posStyle = {
   alignItems: 'center',
 }
 
+const getCenti = (date) => Math.round(date.getMilliseconds() / 10);
+
 const divisions = {
+  'centi': {
+    start: 0,
+    end: 100,
+    getDigits: 'getCenti', // TODO make these functions not date methods
+  },
   'seconds': {
     start: 0,
     end: 60,
@@ -22,19 +29,18 @@ const divisions = {
     getDigits: 'getMinutes'
   },
   'hours': {
-    start: 1,
-    end: 13,
+    start: 0,
+    end: 24,
     getDigits: 'getHours'
   },
 }
-
 
 export function Times({division, time, size, shape, radius}) {
   const { start, end, getDigits } = divisions[division];
 
   const times = [];
-  for (let i = 0; i < 60; i++) {
-    const digits = time[getDigits]();
+  for (let i = start; i < end; i++) {
+    const digits = division === 'centi' ? getCenti(time) : time[getDigits](); // TODO lol
     const radians = ((i - start) / end) * 2 * Math.PI;
     const x = Math.cos(radians) * radius
     const y = Math.sin(radians) * radius

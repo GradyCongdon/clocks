@@ -62,8 +62,12 @@ code {
 }
 
 body {
-  font-family: Arial;
-  color: var(--white);
-  background-color: var(--black);
+}
+
+button {
+  height: 25px;
+  margin: 2px; 
+  appearance: none;
+  -webkit-appearance: none;
 }
 
