@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Clock } from './Clock';
 import { Range } from './Range';
+import { ThemeContext, themes } from './Themes';
 import './App.css';
 
 const navStyle = {
@@ -21,6 +22,8 @@ function App() {
   const [radius, setRadius] = useState(300);
   const [shape, setShape] = useState('circle');
   const [division, setDivision] = useState('seconds');
+  const [theme, setTheme] = useState(themes.red);
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -34,14 +37,21 @@ function App() {
 
   return (
     <main>
-      <Clock 
-        time={time} 
-        size={size} 
-        shape={shape} 
-        division={division}
-        radius={radius}
-    />
+      <ThemeContext.Provider value={theme}>
+        <Clock 
+          time={time} 
+          size={size} 
+          shape={shape} 
+          division={division}
+          radius={radius}
+        />
+      </ThemeContext.Provider>
       <nav style={navStyle}>
+        <button onClick={() => setTheme(themes.red)}> red </button>
+        <button onClick={() => setTheme(themes.green)}> green </button>
+        <button onClick={() => setTheme(themes.blue)}> blue </button>
+        &nbsp;|&nbsp;
+
         <button onClick={() => setDivision('seconds')}> seconds </button>
         <button onClick={() => setDivision('minutes')}> minutes </button>
         <button onClick={() => setDivision('hours')}> hours </button>

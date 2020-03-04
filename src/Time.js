@@ -13,8 +13,7 @@ const baseStyle = {
     borderRadius: '100%',
 };
 
-export function Time({shape, now, size, time, x, y}) {
-
+export function Time({theme, shape, now, size, time, x, y}) {
   let positionStyle;
   switch (shape) {
     case 'loop':
@@ -41,7 +40,9 @@ export function Time({shape, now, size, time, x, y}) {
   }
 
   const individualStyle = { 
-    borderColor: now ? 'red' : 'transparent',
+    borderColor: now ? theme.background: 'transparent',
+    backgroundColor: now ? theme.background : 'transparent',
+    color: now ? theme.foreground : 'black', 
     minWidth: `${size}px`,
     minHeight: `${size}px`,
   };

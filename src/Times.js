@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Time } from './Time';
+import { ThemeContext } from './Themes';
+
+const offsetX = window.screen.width / 2; // TODO this aint right
+const offsetY = window.screen.height / 2.25;
 
 const posStyle = {
   margin: '0 auto',
@@ -36,6 +40,7 @@ const divisions = {
 }
 
 export function Times({division, time, size, shape, radius}) {
+  const theme = useContext(ThemeContext);
   const { start, end, getDigits } = divisions[division];
 
   const times = [];
@@ -54,14 +59,16 @@ export function Times({division, time, size, shape, radius}) {
        size={size}
        shape={shape}
        now={now}
+       theme={theme}
       />
     );
     times.push(t);
   }
-
+  const center = shape === 'circle' ? (<span style={{top: offsetY, left:offsetX, position: 'absolute'}}>&times;</span>) : null;
   return (
     <div style={posStyle}>
       {times}
+      {center}
     </div>
   );
 }
